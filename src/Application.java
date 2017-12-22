@@ -4,36 +4,45 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 public class Application {
-	public static String HOST = "localhost";
-	private static int PORT = 1234;
+	public static void main(String[] args) {
+		try {
+			String stop = new String("stop");
+			
+			//Connexion au serveur
+			Socket socketClient = new Socket("localhost",2500);
+			
+			BufferedReader socketIn = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
+			PrintWriter socketOut = new PrintWriter(socketClient.getOutputStream(),true);
+			Scanner sc = new Scanner(System.in);
+			
+			String str;
+			
+			while(true){
+				
+				//Reception de ce que demande le serveur
+				String recu = socketIn.readLine();
+				recu = recu.replaceAll("##", "\n");
+				
+				System.out.println(recu);
+				//Choix Livre
+				str = sc.nextLine();
+				
+				//Envoie de l'ID				
+				socketOut.println(str);
 
-	public static void main(String[] args) throws UnknownHostException, IOException{
-	
-		Socket client = new Socket(HOST, PORT);
-		
-		//flux sortant de la socket vers le serveur (écriture) :
-		PrintWriter socketOut = new PrintWriter(client.getOutputStream(), true);
-		
-		//flux entrant de la socket pour lecture :
-		BufferedReader socketIn = new BufferedReader(new InputStreamReader(client.getInputStream()));	
-		
-		//lecture clavier : 
-		BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));	
-
-		String line;
-		System.out.println(" Saisir le message au clavier : ");
-		line = clavier.readLine();
-		
-		//on envoie la saisie au serveur :
-		socketOut.println(line);
-		
-		
-		//on récupère la chaine inversée par le service :
-		line = socketIn.readLine();
-		
-		System.out.println(line);
-		
+			}
+			
+			
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Service terminé");
+		}catch (NullPointerException e) {
+			System.out.println("Service terminé");
+		}
 	}
 }
