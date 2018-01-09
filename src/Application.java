@@ -12,7 +12,7 @@ public class Application {
 			String stop = new String("stop");
 			
 			//Connexion au serveur
-			Socket socketClient = new Socket("localhost",2500);
+			Socket socketClient = new Socket("localhost",Integer.parseInt(args[1]));
 			
 			BufferedReader socketIn = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
 			PrintWriter socketOut = new PrintWriter(socketClient.getOutputStream(),true);
