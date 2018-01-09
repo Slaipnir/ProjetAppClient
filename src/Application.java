@@ -9,10 +9,9 @@ import java.util.Scanner;
 public class Application {
 	public static void main(String[] args) {
 		try {
-			String stop = new String("stop");
 			
 			//Connexion au serveur
-			Socket socketClient = new Socket("localhost",Integer.parseInt(args[1]));
+			Socket socketClient = new Socket("localhost",Integer.parseInt(args[0]));
 			
 			BufferedReader socketIn = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
 			PrintWriter socketOut = new PrintWriter(socketClient.getOutputStream(),true);
@@ -40,8 +39,8 @@ public class Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("Service terminé");
-		}catch (NullPointerException e) {
+			System.out.println("exit");
+		} catch (NullPointerException e) {
 			System.out.println("Service terminé");
 		}
 	}
