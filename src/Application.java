@@ -11,10 +11,12 @@ public class Application {
 		try {
 			
 			//Connexion au serveur
+			@SuppressWarnings("resource")
 			Socket socketClient = new Socket("localhost",Integer.parseInt(args[0]));
 			
 			BufferedReader socketIn = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
 			PrintWriter socketOut = new PrintWriter(socketClient.getOutputStream(),true);
+			@SuppressWarnings("resource")
 			Scanner sc = new Scanner(System.in);
 			
 			String str;
