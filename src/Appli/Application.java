@@ -13,7 +13,7 @@ public class Application {
 			
 			//Connexion au serveur
 			@SuppressWarnings("resource")
-			Socket socketClient = new Socket("localhost",Integer.parseInt(args[0]));
+			Socket socketClient = new Socket(args[0],Integer.parseInt(args[1]));
 			
 			BufferedReader socketIn = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
 			PrintWriter socketOut = new PrintWriter(socketClient.getOutputStream(),true);
@@ -26,8 +26,10 @@ public class Application {
 				
 				//Reception de ce que demande le serveur
 				String recu = socketIn.readLine();
-				recu = recu.replaceAll("##", "\n");
+				recu = recu.replaceAll("##", "\n"); //dans le cas ou le serveur envoie une string sur plusieurs lignes
 				
+				
+				//affichage de la demande du serveur
 				System.out.println(recu);
 				
 				//Reponse du client
