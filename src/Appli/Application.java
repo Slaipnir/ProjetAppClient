@@ -29,20 +29,21 @@ public class Application {
 				recu = recu.replaceAll("##", "\n");
 				
 				System.out.println(recu);
-				//Choix Livre
+				
+				//Reponse du client
 				str = sc.nextLine();
 				
-				//Envoie de l'ID				
+				//Envoie de la reponse du client au serveur				
 				socketOut.println(str);
 
 			}
 			
 			
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Ce Serveur n'exsite pas changer l'ip et/ou le port");
 		} catch (IOException e) {
 			System.out.println("exit");
+			
 		} catch (NullPointerException e) {
 			System.out.println("Service terminé");
 		}
